@@ -1,0 +1,8 @@
+[project]
+name = "jokester-agent"
+version = "0.1.0"
+dependencies = [
+    "langgraph",
+    "openai>=1.14.0",
+    "python-dotenv"
+]

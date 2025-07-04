@@ -1,9 +1,8 @@
-import os
-import asyncio
 from dotenv import load_dotenv
-from langgraph.prebuilt import create_react_agent
-from langchain_core.messages import HumanMessage
-from langchain_openai import ChatOpenAI  # Requires: pip install -U langchain-openai
+import asyncio
+from agents import Agent, Runner, trace
+from openai import OpenAI
+import os # Requires: pip install -U langchain-openai
 
 # Load API key from .env
 load_dotenv(override=True)
@@ -16,22 +15,17 @@ load_dotenv(override=True)
 #     temperature=0.7,
 #     base_url=os.environ["OPENAI_API_BASE"]
 # )
-agent = create_react_agent(
-    model="openai:gpt-4o",
-    tools=[],
-    prompt="You are a joke teller."
-)
+agent = Agent(name="Jokester", instructions="You are a joke teller", model="gpt-4o-mini")
 
 
 
 # Async runner function
 async def main():
-    result = await agent.ainvoke({
-        "messages": [
-            {"role": "user", "content": "Tell a joke about Autonomous AI Agents"}
-        ]
-    })
-    print("🤖 Joke:", result["messages"][-1].content)
+    # Run the joke with Runner.run(agent, prompt) then print final_output
+
+ with trace("Telling a joke"):
+    result = await Runner.run(agent, "Tell a joke about Autonomous AI Agents")
+    print(result.final_output)
 
 if __name__ == "__main__":
     asyncio.run(main())

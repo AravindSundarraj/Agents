@@ -2,7 +2,16 @@
 name = "jokester-agent"
 version = "0.1.0"
 dependencies = [
+    "agentic>=0.0.2",
     "langgraph",
     "openai>=1.14.0",
-    "python-dotenv"
+    "openai-agents[litellm]>=0.1.0",
+    "python-dotenv",
+    "twilio>=8.0.0",
+    "langchain-core==0.3.66",
+    "langchain-community==0.3.26",
+    "langchain==0.3.26",
+    "rpds-py==0.26.0",
+    "litellm>=1.73.6",
+    "sendgrid>=6.12.4",
 ]
